@@ -106,7 +106,7 @@ router.get("/", async (req, res, next) => {
 
     await page.waitFor(3000);
     numItems = await page.$$eval("#mod-main-cntr > div.throbber-container > table > tbody > tr", (le: { length: number; }) => le.length);
-    data.currentMonthItems = numItems / 3;
+    data.currentMonthItems = (numItems / 3) - 1;
     iterations = 1;
 
     //get current month SOLD FOR
@@ -134,7 +134,7 @@ router.get("/", async (req, res, next) => {
     });
 
     numItems = await page.$$eval("#mod-main-cntr > div.throbber-container > table > tbody > tr", (le: { length: number; }) => le.length);
-    data.lastMonthItems = numItems / 3;
+    data.lastMonthItems = (numItems / 3) - 1;
     iterations = 1;
     //get current month SOLD FOR
     let lastMonthSoldFor = 0;
