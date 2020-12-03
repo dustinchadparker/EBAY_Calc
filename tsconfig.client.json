@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+      "outDir": "./public/js/",
+      "noImplicitAny": true,
+      "module": "es6",
+      "target": "es5",
+      "jsx": "react",
+      "moduleResolution": "node",
+      "allowSyntheticDefaultImports": true,
+      "allowJs": true,
+      "lib":[
+          "es2017", "es2015", "es2016", "dom"
+      ]
+    },
+    "include": [
+        "src/client/**/*"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+  }
