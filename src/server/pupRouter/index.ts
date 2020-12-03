@@ -12,8 +12,8 @@ router.get("/", async (req, res, next) => {
       executablePath: 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
     });
 
-    let USERNAME = "USERNAME";
-    let PASSWORD = "PASSWORD";
+    let USERNAME = "PUT YOUR USERNAME HERE";
+    let PASSWORD = "PUT YOUR PASSWORD HERE";
 
     const page = await browser.newPage(); //creates new page
     await page.goto("https://my.ebay.com/ws/eBayISAPI.dll?MyEbayBeta&SortOrder=DESCEND&NewPeriod=CurrentMonth&&searchText=&Column=DATE_PURCHASED&pg=1&CurrentPage=LabelManagement&searchBy=NONE&COUNT=100&guest=1", {
@@ -59,6 +59,7 @@ router.get("/", async (req, res, next) => {
       //IF SHIPPING LABEL HAS NOT BEEN VOIDED
       let shipStatus = await page.$eval(`tbody > tr:nth-child(${iterations}) > td:nth-child(7)`, (el: { innerText: string; }) => el.innerText);
 
+      await page.waitFor(4000);
       //CHECK IF VOIDED
       if (shipStatus.charAt(0) != 'V') {
         //ADD SHIPPING COST
@@ -82,7 +83,7 @@ router.get("/", async (req, res, next) => {
     numItems = numItems - 1;
     //get shipping costs
     let lastMonthShip = 0;
-    await page.waitFor(8000);
+    await page.waitFor(4000);
     while ((iterations - 1) <= numItems) {
 
       //IF SHIPPING LABEL HAS NOT BEEN VOIDED
@@ -103,6 +104,7 @@ router.get("/", async (req, res, next) => {
       waitUntil: "domcontentloaded"
     });
 
+    await page.waitFor(3000);
     numItems = await page.$$eval("#mod-main-cntr > div.throbber-container > table > tbody > tr", (le: { length: number; }) => le.length);
     data.currentMonthItems = numItems / 3;
     iterations = 1;
@@ -111,6 +113,8 @@ router.get("/", async (req, res, next) => {
     let currentMonthSoldFor = 0;
 
     while (iterations <= numItems) {
+      
+    await page.waitFor(3000);
       //GET STATUS
       let shipStatus = await page.$eval(`#mod-main-cntr > div.throbber-container > table > tbody > tr:nth-child(${iterations}) > td:nth-child(2)`, (el: { innerText: string; }) => el.innerText);
 
@@ -148,11 +152,10 @@ router.get("/", async (req, res, next) => {
     //SEND DATA TO MAIN
     data.lastMonthSoldFor = lastMonthSoldFor;
 
-    console.log(data);
 
     data.index.push[0];
-    res.send(JSON.stringify(data));
     browser.close();
+    res.send(JSON.stringify(data));
   } catch (e) {
     throw e;
   }

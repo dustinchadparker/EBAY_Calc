@@ -23,16 +23,16 @@ export default class Alldata extends React.Component<
     )
       .then(response => response.json())
       .then(data => {
-        const items = data.index.map((_index: any, index: number) => ({
-          currentMonthShip: data.currentMonthShip[index],
-          lastMonthShip: data.lastMonthShip[index],
-          currentMonthSoldFor: data.currentMonthSoldFor[index],
-          lastMonthSoldFor: data.lastMonthSoldFor[index],
-          lastMonthItems: data.lastMonthItems[index],
-          currentMonthItems: data.currentMonthItems[index],
+        const items = [{
+          currentMonthShip: data.currentMonthShip,
+          lastMonthShip: data.lastMonthShip,
+          currentMonthSoldFor: data.currentMonthSoldFor,
+          lastMonthSoldFor: data.lastMonthSoldFor,
+          lastMonthItems: data.lastMonthItems,
+          currentMonthItems: data.currentMonthItems,
+        }];
 
-        }));
-
+        console.log(items);
         this.setState({ items });
       }).catch(function (e) {
         console.log(e);
@@ -40,6 +40,7 @@ export default class Alldata extends React.Component<
   };
 
   render() {
+    console.log(this.state);
     return (
       <main className="container">
         <h1 className="text-center text-white">EBAY PROFITS</h1>

@@ -14,27 +14,27 @@ export default class BlogPreviewCard extends React.Component<
     return (
       <div className="input-group mb-1 justify-content: space-between">
         <span className="input-group-text col-2 text-white bg-dark">
-          {currentMonthShip}
+          ${currentMonthShip}
         </span>
 
         <span className="input-group-text col-2 text-white bg-dark">
-          {currentMonthSoldFor}
+         ${currentMonthSoldFor}
         </span>
 
-        <span className="input-group-text col-2 text-red bg-dark">
-          {currentMonthProf}
-        </span>
-
-        <span className="input-group-text col-2 text-white bg-dark">
-          {lastMonthShip}
+        <span className="input-group-text col-2 text-warning font-weight-bold bg-dark">
+          ${currentMonthProf}
         </span>
 
         <span className="input-group-text col-2 text-white bg-dark">
-          {lastMonthSoldFor}
+          ${lastMonthShip}
         </span>
 
-        <span className="input-group-text col-2 text-red bg-dark">
-          {lastMonthProf}
+        <span className="input-group-text col-2 text-warning font-weight-bold bg-dark">
+          ${lastMonthSoldFor}
+        </span>
+
+        <span className="input-group-text col-2 text-yellow bg-dark">
+          ${lastMonthProf}
         </span>
 
       </div>
